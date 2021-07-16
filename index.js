@@ -9,6 +9,7 @@ require('module-alias/register')
 const PORT = process.env.PORT
 
 const app = express()
+app.set('trust proxy', 1)
 
 console.log(app.get('env'))
 

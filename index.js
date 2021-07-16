@@ -34,6 +34,7 @@ const SESSION_SETTINGS = {
     secret: process.env.SESSION_SECRET,
     resave: true,
     rolling: true,
+    withCredentials: true,
     saveUninitialized: false,
     cookie: { maxAge: 60000 }
 }

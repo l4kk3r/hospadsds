@@ -6,7 +6,7 @@ exports.state = async (req, res) => {
         const userId = req.session && req.session.userId
         if (!userId) return res.json({ authorized: false })
 
-        const user = await User.find({ _id: userId })
+        const user = await User.findById(userId)
         if (!user) return res.json({ authorized: false })
 
         res.json({ authorized: true, user })

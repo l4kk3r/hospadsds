@@ -7,8 +7,7 @@ const options = {
 }
 
 const registerValidator = Joi.object({
-    firstName: Joi.string().required(),
-    lastName: Joi.string().required(),
+    name: Joi.string().required(),
     email: Joi.string().email().required(),
     sex: Joi.string().valid('male', 'female').required(),
     password: Joi.string().min(6).required(),

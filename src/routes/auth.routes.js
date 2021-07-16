@@ -13,6 +13,6 @@ const authRequiredMiddleware = require('@middlewares/authRequired')
 router.get('/state', authServices.state)
 router.post('/register', authForbiddenMiddleware, authValidators.bind('register'), authServices.register)
 router.post('/login', authForbiddenMiddleware, authValidators.bind('login'), authServices.login)
-router.post('/logout', authRequiredMiddleware, authServices.logout)
+router.get('/logout', authRequiredMiddleware, authServices.logout)
 
 module.exports = router

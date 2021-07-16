@@ -4,23 +4,23 @@ const options = {
     definition: {
         openapi: "3.0.0",
         info: {
-            title: "HospalTrip API",
+            title: "AmoDoc API",
             version: "1.0.0",
-            description: "HospalTrip.",
+            description: "Service for finding doctors across the world !",
             contact: {
                 name: "Tim Vaulin"
             }
         },
         servers: [
             {
-                url: "https://hospaltrip-server.herokuapp.com"
+                url: "https://amoback.herokuapp.com"
             },
             {
                 url: "http://localhost:8080"
             }
         ],
     },
-    apis: ['./src/*/*.swagger.js']
+    apis: ['./src/documentation/*.documentation.js']
 }
 
 const specs = swaggerJsDoc(options)

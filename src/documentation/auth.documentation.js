@@ -1,65 +1,46 @@
 /**
  * @swagger
  * components:
- *   securitySchemes:
- *     bearerAuth:
- *       type: http
- *       scheme: bearer
- *       bearerFormat: JWT
- * security:
- *   - bearerAuth: []   
- */
-
-/**
- * @swagger
- * components:
  *   schemas:
- *     Request_Auth_Login:
+ *     User:
  *       type: object
  *       required:
+ *         - _id
+ *         - role
  *         - email
+ *         - balance
+ *         - firstName
+ *         - lastName
+ *         - sex
  *         - password
  *       properties:
+ *         _id:
+ *           type: integer
+ *         role: 
+ *           type: string
+ *           enum: [user, admin]
  *         email:
  *           type: string
- *           description: User email
+ *         balance:
+ *           type: integer
+ *         firstName:
+ *           type: string
+ *         lastName:
+ *           type: string
+ *         sex:
+ *           type: string
+ *           enum: [male, female]
  *         password:
  *           type: string
- *           description: User password
  *       example:
- *         email: johndoe@yandex.ru
- *         password: JohnPassword123
- */
-
-/**
- * @swagger
- * components:
- *   schemas:
- *     Request_Auth_Register:
- *       type: object
- *       required:
- *         - name
- *         - email
- *         - password
- *         - confirmPassword
- *       properties:
- *         name:
- *           type: string
- *           description: User name
- *         email:
- *           type: string
- *           description: User email
- *         password:
- *           type: string
- *           description: User password
- *         confirmPassword:
- *           type: string
- *           description: Password confirmation
- *       example:
- *         name: John
- *         email: johndoe@yandex.ru
- *         password: JohnPassword123
- *         confirmPassword: JohnPassword123
+ *         _id: 100
+ *         role: user
+ *         firstName: Johny
+ *         lastName: Doe
+ *         email: johnydoe@yandex.ru
+ *         balance: 2500
+ *         sex: male
+ *         password: jsd2j3o99skjrj3i4k2o3o2kaslsdl23
  */
 
 /**
@@ -73,27 +54,26 @@
  * @swagger
  * /auth/login:
  *   post:
- *     security:
- *       - bearerAuth: []
- *     summary: Login to site
+ *     summary: Login to the site
  *     tags: [Auth]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Request_Auth_Login'
+ *             $ref: '#/components/schemas/User'
+ *           example:
+ *              email: johnydoe@gmail.com
+ *              password: Superman123
  *     responses:
- *       200:
- *         description: Data for logging into site
+ *       '200':
+ *         description: Ok!
  */
 
 /**
  * @swagger
  * /auth/register:
  *   post:
- *     security:
- *       - bearerAuth: []
  *     summary: Register user
  *     tags: [Auth]
  *     requestBody:
@@ -101,8 +81,36 @@
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Request_Auth_Register'
+ *             $ref: '#/components/schemas/User'
+ *           example:
+ *             firstName: Johny
+ *             lastName: Doe
+ *             email: johnydoe@yandex.ru
+ *             password: Superman123
+ *             confirmPassword: Superman123
  *     responses:
- *       200:
- *         description: Data for logging into site
+ *       '200':
+ *         description: Ok!
+ */
+
+/**
+ * @swagger
+ * /auth/logout:
+ *   get:
+ *     summary: Logout user
+ *     tags: [Auth]
+ *     responses:
+ *       '200':
+ *         description: Ok!
+ */
+
+/**
+ * @swagger
+ * /auth/state:
+ *   get:
+ *     summary: Get logined user data
+ *     tags: [Auth]
+ *     responses:
+ *       '200':
+ *         description: Ok!
  */

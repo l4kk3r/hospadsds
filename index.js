@@ -29,15 +29,21 @@ app.get('/ko', (req, res) => {
     console.log(req.query)
 })
 
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+}))
+app.use(cookieParser())
+
 /* SESSION STORE */
 const SESSION_SETTINGS = {
     store: new RedisStore({ client: redisClient }),
     secret: process.env.SESSION_SECRET,
-    resave: true,
-    rolling: true,
+    resave: false,
+    rolling: false,
     withCredentials: true,
-    saveUninitialized: false,
-    cookie: { maxAge: 60000 }
+    saveUninitialized: true,
+    cookie: { maxAge: 60000, secure: false, httpOnly: false }
 }
 app.use(session(SESSION_SETTINGS))
 
@@ -53,9 +59,7 @@ const swaggerSpecs = require('@connections/swagger.connection')
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpecs))
 
 /* APP */
-app.use(cors())
-app.use(cookieParser())
-app.use(express.json())
+app.use(express.json({ limit: '5mb' }))
 app.use(express.urlencoded({ extended: true}))
 
 /* ROUTES */
